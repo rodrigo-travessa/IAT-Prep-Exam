@@ -1,0 +1,36 @@
+﻿@model Question
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<form method="post">
+    <div class="row container">
+        <label asp-for="Statement" class="text-center">Enunciado</label>
+        <textarea asp-for="Statement" class="form-control" rows="5"></textarea>
+    </div>
+    <br />
+
+    @for (int i = 0; i <= 4; i++)
+    {
+        <div>
+            <label asp-for="Alternatives">Alternativa @(i + 1)</label>
+            <input asp-for="Alternatives[i].Text" class="form-control" />
+            <input asp-for="Alternatives[i].IsRight" type="checkbox" />
+            <label> Marque se a alternativa for a correta </label>
+        </div>
+    }
+    <br />
+    <div class="col-12 row">
+        <input type="submit" value="Criar Questão" class="btn btn-primary col-6" />
+        <a class="btn btn-secondary col-6" asp-action="Index">Back to List</a>
+    </div>
+</form>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
