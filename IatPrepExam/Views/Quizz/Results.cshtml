@@ -1,0 +1,40 @@
+﻿@model IatPrepExam.Models.Quizz
+
+@{
+    ViewData["Title"] = "Results";
+    char[] letters = { 'A','B','C','D','E'};
+}
+
+<h1>Results</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1>Questionário</h1>
+        </div>
+    </div>
+    <div>
+        <input asp-for="Id" hidden />
+        @if (Model.Questions != null)
+        {
+            @for (int i = 0; i < Model.Questions.Count; i++)
+            {
+                <h3>@(i+1) - @Model.Questions[i].Statement</h3>
+                <div>
+                    @for (int j = 0; j <= 4; j++)
+                    {
+                        <label style="color: @(@Model.Questions[i].Alternatives[j].IsRight ? "blue" : "red")">@letters[j] - @Model.Questions[i].Alternatives[j].Text </label>
+                    <br />                        
+                    }
+                    <h5> Sua Resposta foi @Model.Answers.GetValueOrDefault(@Model.Questions[i].QuestionId.ToString())</h5>
+                </div>
+
+                <br />
+            }
+        }
+    </div>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -4,6 +4,7 @@ using IatPrepExam.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IatPrepExam.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230708201814_ImprovedQuizzModel")]
+    partial class ImprovedQuizzModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,10 +57,15 @@ namespace IatPrepExam.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("QuestionId"));
 
+                    b.Property<int?>("QuizzId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Statement")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("QuestionId");
+
+                    b.HasIndex("QuizzId");
 
                     b.ToTable("Questions");
                 });
@@ -70,10 +78,15 @@ namespace IatPrepExam.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Answers")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("FinishedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("NameOfStudent")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("NumberOfQuestions")
@@ -96,21 +109,6 @@ namespace IatPrepExam.Migrations
                     b.ToTable("Quizzes");
                 });
 
-            modelBuilder.Entity("QuestionQuizz", b =>
-                {
-                    b.Property<int>("QuestionsQuestionId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("QuizzesId")
-                        .HasColumnType("int");
-
-                    b.HasKey("QuestionsQuestionId", "QuizzesId");
-
-                    b.HasIndex("QuizzesId");
-
-                    b.ToTable("QuestionQuizz");
-                });
-
             modelBuilder.Entity("IatPrepExam.Models.Alternative", b =>
                 {
                     b.HasOne("IatPrepExam.Models.Question", "Question")
@@ -122,24 +120,21 @@ namespace IatPrepExam.Migrations
                     b.Navigation("Question");
                 });
 
-            modelBuilder.Entity("QuestionQuizz", b =>
+            modelBuilder.Entity("IatPrepExam.Models.Question", b =>
                 {
-                    b.HasOne("IatPrepExam.Models.Question", null)
-                        .WithMany()
-                        .HasForeignKey("QuestionsQuestionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("IatPrepExam.Models.Quizz", null)
-                        .WithMany()
-                        .HasForeignKey("QuizzesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("Questions")
+                        .HasForeignKey("QuizzId");
                 });
 
             modelBuilder.Entity("IatPrepExam.Models.Question", b =>
                 {
                     b.Navigation("Alternatives");
+                });
+
+            modelBuilder.Entity("IatPrepExam.Models.Quizz", b =>
+                {
+                    b.Navigation("Questions");
                 });
 #pragma warning restore 612, 618
         }
