@@ -17,7 +17,8 @@ namespace IatPrepExam.Controllers
         // GET: Question
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Questions.ToListAsync());
+            var result = await _context.Questions.ToListAsync();
+            return View(result);
         }
 
         // GET: Question/Details/5
