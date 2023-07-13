@@ -123,7 +123,7 @@ namespace IatPrepExam.Controllers
         [HttpPost]
         public IActionResult Results(Quizz quizz)
         {
-            var x = Request.Form.ToDictionary();
+            var x = Request.Form.ToDictionary(x => x.Key, x => x.Value);
 
             var AnsweredQuizz = _context.Quizzes.Include(u => u.Questions).ThenInclude(u => u.Alternatives).Where(u => u.Id == quizz.Id).First();
             string[] letters = { "A", "B", "C", "D", "E" };
@@ -133,18 +133,16 @@ namespace IatPrepExam.Controllers
                 if (x.ContainsKey(question.QuestionId.ToString()))
                 {
                     AnsweredQuizz.Answers.Add(question.QuestionId.ToString(), x.GetValueOrDefault(question.QuestionId.ToString()));
-                }
-            }
-            foreach (var question in AnsweredQuizz.Questions)
-            {
-                int comparator = letters.ToList().IndexOf(x.GetValueOrDefault(question.QuestionId.ToString()));
-                var questionFromDB = _context.Questions.Where(u => u.QuestionId == question.QuestionId).Include("Alternatives").FirstOrDefault();
-                if (questionFromDB.Alternatives[comparator].IsRight)
-                {
-                    AnsweredQuizz.Rights += 1;
+                    int comparator = letters.ToList().IndexOf(x.GetValueOrDefault(question.QuestionId.ToString()));
+                    var questionFromDB = _context.Questions.Where(u => u.QuestionId == question.QuestionId).Include("Alternatives").FirstOrDefault();
+                    if (questionFromDB.Alternatives[comparator].IsRight)
+                    {
+                        AnsweredQuizz.Rights += 1;
+                    }
                 }
             }
 
+        
             int Wrongs = AnsweredQuizz.Answers.Count() - AnsweredQuizz.Rights ;
             AnsweredQuizz.Score = AnsweredQuizz.Rights - (0.25 * Wrongs);
 

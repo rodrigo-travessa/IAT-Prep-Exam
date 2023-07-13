@@ -41,7 +41,12 @@ namespace IatPrepExam.Controllers
         // GET: Question/Create
         public IActionResult Create()
         {
-            return View();
+            Question question = new Question();
+            for (int i = 0; i < 5; i++)
+            {
+                question.Alternatives.Add(new Alternative {});
+            }
+            return View(question);
         }
 
         // POST: Question/Create
@@ -49,12 +54,12 @@ namespace IatPrepExam.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Question question)
+        public IActionResult Create(Question question)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(question);
-                await _context.SaveChangesAsync();
+                _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(question);
