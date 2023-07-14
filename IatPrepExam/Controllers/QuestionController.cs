@@ -83,10 +83,7 @@ namespace IatPrepExam.Controllers
             return View(question);
         }
 
-        // POST: Question/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        
+                
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(Question question)
@@ -97,7 +94,12 @@ namespace IatPrepExam.Controllers
                 questionFromDb.Statement = question.Statement;
                 questionFromDb.Alternatives = question.Alternatives;
                 _context.Questions.Update(questionFromDb);
+                foreach (var item in questionFromDb.Alternatives)
+                {
+                    _context.Alternatives.Update(item);
+                }
                 _context.SaveChanges();
+                var result = _context.Questions.Find(question.QuestionId);
                 return RedirectToAction(nameof(Index));
             }
             return View(question);
