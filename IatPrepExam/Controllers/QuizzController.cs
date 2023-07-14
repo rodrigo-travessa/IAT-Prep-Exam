@@ -63,7 +63,7 @@ namespace IatPrepExam.Controllers
                 _context.Add(quizzWithQuestions);
                 _context.SaveChanges();
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("TakeTest", quizz.Id.ToString());
             }
             return View(quizz);
         }
@@ -137,6 +137,15 @@ namespace IatPrepExam.Controllers
         
             int Wrongs = AnsweredQuizz.Answers.Count() - AnsweredQuizz.Rights ;
             AnsweredQuizz.Score = AnsweredQuizz.Rights - (0.25 * Wrongs);
+            double y = AnsweredQuizz.Score / AnsweredQuizz.Questions.Count();
+            if(y < 0)
+            {
+                AnsweredQuizz.ScoreRatio = 0;
+            }
+            else
+            {
+                AnsweredQuizz.ScoreRatio = y * 100;
+            }
 
             _context.Quizzes.Update(AnsweredQuizz);
             _context.SaveChanges();

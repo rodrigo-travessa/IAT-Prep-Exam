@@ -84,17 +84,15 @@ namespace IatPrepExam.Controllers
 
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Question question)
+        public IActionResult Edit(Question question)
         {
             if (ModelState.IsValid)
             {
-                foreach (var item in question.Alternatives)
+                foreach (var alt in question.Alternatives)
                 {
-                    _context.Questions.FromSql($"UPDATE dbo.Alternatives SET Text = '{item.Text}', IsRight = {(item.IsRight ? 1 : 0)} WHERE Id = {item.Id}");
+                    _context.Alternatives.Update(alt);
                     _context.SaveChanges();
                 }
-                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
                 //return RedirectToAction(nameof(Index));
             }
