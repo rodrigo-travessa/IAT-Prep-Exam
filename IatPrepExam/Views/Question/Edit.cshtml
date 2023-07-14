@@ -1,6 +1,12 @@
-﻿@model IatPrepExam.Models.Question
+﻿@model Question
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
 
 <form method="post">
+    <input asp-for="QuestionId" hidden />
     <div class="row container">
         <label asp-for="Statement" class="text-center">Enunciado</label>
         <textarea asp-for="Statement" class="form-control" rows="5"></textarea>

@@ -60,21 +60,21 @@ namespace IatPrepExam.Controllers
             if (ModelState.IsValid)
             {
                 _context.Add(question);
-                _context.SaveChangesAsync();
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             return View(question);
         }
 
         // GET: Question/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var question = await _context.Questions.FindAsync(id);
+            var question = _context.Questions.Find(id);
             question.Alternatives = _context.Alternatives.Where(a => a.QuestionId == id).ToList();
             if (question == null)
             {
@@ -86,33 +86,18 @@ namespace IatPrepExam.Controllers
         // POST: Question/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("QuestionId,Statement")] Question question)
+        public IActionResult Edit(Question question)
         {
-            if (id != question.QuestionId)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(question);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!QuestionExists(question.QuestionId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                var questionFromDb = _context.Questions.Find(question.QuestionId);
+                questionFromDb.Statement = question.Statement;
+                questionFromDb.Alternatives = question.Alternatives;
+                _context.Questions.Update(questionFromDb);
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             return View(question);
