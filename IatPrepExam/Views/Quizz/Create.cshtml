@@ -5,6 +5,7 @@
 }
 
 <h1 class="text-center">Create Quizz</h1>
+<br />
 <hr />
 <div class="row col-12">
     <div class="container">
@@ -20,10 +21,11 @@
                 <input asp-for="NumberOfQuestions" class="form-control" />
                 <span asp-validation-for="NumberOfQuestions" class="text-danger"></span>
             </div>
-            <div class="row">
-                <input type="submit" class="btn btn-primary form-control col-6" vlaue="Criar Simulado"/>
+            <br /><br />
+                <input type="submit" class="btn btn-primary form-control col-6" value="Criar Simulado"/>
+            <br /><br />
                 <a asp-action="Index" class="btn btn-secondary form-control col-6">Back to List</a>
-            </div>
+            
         </form>
     </div>
 </div>

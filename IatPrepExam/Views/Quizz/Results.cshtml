@@ -19,22 +19,20 @@
         {
             @for (int i = 0; i < Model.Questions.Count; i++)
             {
-                <h3>@(i+1) - @Model.Questions[i].Statement</h3>
+                <h3  > @(i+1) - @Model.Questions[i].Statement</h3>
                 <div>
                     @for (int j = 0; j <= 4; j++)
                     {
                         <label style="color: @(@Model.Questions[i].Alternatives[j].IsRight ? "blue" : "red")">@letters[j] - @Model.Questions[i].Alternatives[j].Text </label>
                     <br />                        
                     }
-                    <h5> Sua Resposta foi @Model.Answers.GetValueOrDefault(@Model.Questions[i].QuestionId.ToString())</h5>
                 </div>
-
+                <h4>Sua Resposta: @Model.Answers.Where(u=> u.Question.QuestionId == Model.Questions[i].QuestionId).First().AnswerValue</h4>
                 <br />
             }
         }
     </div>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-secondary" asp-action="Index">Back to List</a>
 </div>

@@ -29,19 +29,11 @@ namespace IatPrepExam.Controllers
         // GET: Quizz/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            
+            var AnsweredQuizz = _context.Quizzes.Include("Answers").Include(u => u.Questions).ThenInclude(u => u.Alternatives).Where(u => u.Id == id).First();
+            string[] letters = { "A", "B", "C", "D", "E" };           
 
-            var quizz = await _context.Quizzes
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (quizz == null)
-            {
-                return NotFound();
-            }
-
-            return View(quizz);
+            return View(AnsweredQuizz);
         }
 
         // GET: Quizz/Create
@@ -132,7 +124,7 @@ namespace IatPrepExam.Controllers
             {
                 if (x.ContainsKey(question.QuestionId.ToString()))
                 {
-                    AnsweredQuizz.Answers.Add(question.QuestionId.ToString(), x.GetValueOrDefault(question.QuestionId.ToString()));
+                    AnsweredQuizz.Answers.Add(new Answer { QuestionId = question.QuestionId, QuizzId = quizz.Id, AnswerValue = x.GetValueOrDefault(question.QuestionId.ToString())});
                     int comparator = letters.ToList().IndexOf(x.GetValueOrDefault(question.QuestionId.ToString()));
                     var questionFromDB = _context.Questions.Where(u => u.QuestionId == question.QuestionId).Include("Alternatives").FirstOrDefault();
                     if (questionFromDB.Alternatives[comparator].IsRight)

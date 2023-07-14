@@ -9,10 +9,9 @@ namespace IatPrepExam.Models
         public int Id { get; set; }
         public DateTime StartedAt { get; set; } = DateTime.Now;
         public DateTime FinishedAt { get; set; }
-        public List<Question> Questions { get; set; } = new List<Question>();
-        public double Score { get; set; }
-        [NotMapped]
-        public Dictionary<string, string> Answers { get; set; } = new Dictionary<string, string>();
+        public List<Question> Questions { get; set; } = new ();
+        public double Score { get; set; }        
+        public List<Answer> Answers { get; set; } = new ();
         [DisplayName("Nome do Estudante")]
         public string? NameOfStudent { get; set; }
         [DisplayName("Número de Questões")]

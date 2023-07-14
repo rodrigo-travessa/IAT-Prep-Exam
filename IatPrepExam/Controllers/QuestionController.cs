@@ -45,7 +45,7 @@ namespace IatPrepExam.Controllers
             Question question = new Question();
             for (int i = 0; i < 5; i++)
             {
-                question.Alternatives.Add(new Alternative {});
+                question.Alternatives.Add(new Alternative { });
             }
             return View(question);
         }
@@ -59,7 +59,7 @@ namespace IatPrepExam.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(question);
+                _context.Questions.Add(question);
                 _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
@@ -74,8 +74,7 @@ namespace IatPrepExam.Controllers
                 return NotFound();
             }
 
-            var question = _context.Questions.Find(id);
-            question.Alternatives = _context.Alternatives.Where(a => a.QuestionId == id).ToList();
+            var question = _context.Questions.Where(u => u.QuestionId == id).Include("Alternatives").Include("Quizzes").First();
             if (question == null)
             {
                 return NotFound();
@@ -83,24 +82,21 @@ namespace IatPrepExam.Controllers
             return View(question);
         }
 
-                
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Question question)
+        public async Task<IActionResult> Edit(Question question)
         {
             if (ModelState.IsValid)
             {
-                var questionFromDb = _context.Questions.Find(question.QuestionId);
-                questionFromDb.Statement = question.Statement;
-                questionFromDb.Alternatives = question.Alternatives;
-                _context.Questions.Update(questionFromDb);
-                foreach (var item in questionFromDb.Alternatives)
+                foreach (var item in question.Alternatives)
                 {
-                    _context.Alternatives.Update(item);
+                    _context.Questions.FromSql($"UPDATE dbo.Alternatives SET Text = '{item.Text}', IsRight = {(item.IsRight ? 1 : 0)} WHERE Id = {item.Id}");
+                    _context.SaveChanges();
                 }
                 _context.SaveChanges();
-                var result = _context.Questions.Find(question.QuestionId);
                 return RedirectToAction(nameof(Index));
+                //return RedirectToAction(nameof(Index));
             }
             return View(question);
         }

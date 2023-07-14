@@ -12,5 +12,6 @@ namespace IatPrepExam.Data
         public DbSet<Question> Questions { get; set; } = default!;
         public DbSet<Alternative> Alternatives { get; set; } = default!;
         public DbSet<Quizz> Quizzes { get; set; } = default!;
+        public DbSet<Answer> Answers { get; set; } = default!;
     }
 }

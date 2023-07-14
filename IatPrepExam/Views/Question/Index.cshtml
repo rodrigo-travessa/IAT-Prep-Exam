@@ -1,13 +1,16 @@
 ﻿@model IEnumerable<IatPrepExam.Models.Question>
 
-<h1>Index</h1>
+<h1>@Model.Count() Questões Cadastradas até o Momento</h1>
 
 <p>
-    <a asp-controller="Question" asp-action="Create">Create New</a>
+    <a class="btn btn-primary" asp-controller="Question" asp-action="Create">Create New</a>
 </p>
 <table class="table">
     <thead>
         <tr>
+            <th>
+                Id da Questão
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Statement)
             </th>
@@ -15,17 +18,20 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Statement)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.QuestionId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.QuestionId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.QuestionId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QuestionId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Statement)
+                </td>
+                <td width="15%">
+                    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.QuestionId">Edit</a>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.QuestionId">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

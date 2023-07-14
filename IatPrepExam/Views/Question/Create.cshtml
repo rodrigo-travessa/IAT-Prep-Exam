@@ -11,16 +11,17 @@
         <textarea asp-for="Statement" class="form-control" rows="5"></textarea>
     </div>
     <br />
-
-    @for (int i = 0; i <= 4; i++)
-    {
-        <div>
-            <label asp-for="Alternatives">Alternativa @(i + 1)</label>
-            <input asp-for="Alternatives[i].Text" class="form-control" />
-            <input asp-for="Alternatives[i].IsRight" type="checkbox" />
-            <label> Marque se a alternativa for a correta </label>
-        </div>
-    }
+    <div class="row">
+        @for (int i = 0; i <= 4; i++)
+        {
+            <div style="display:flex">
+                <label style="width:3%; font-size:xx-large" asp-for="Alternatives">@(i + 1)</label>
+                <input asp-for="Alternatives[i].Text" class="form-control" />
+                <input style="width:7%" asp-for="Alternatives[i].IsRight" type="checkbox" />
+                <label> Marque se correta </label>
+            </div>
+        }
+    </div>
     <br />
     <div class="col-12 row">
         <input type="submit" value="Criar Questão" class="btn btn-primary col-6" />

@@ -4,6 +4,7 @@ using IatPrepExam.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IatPrepExam.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230714200108_addingAnswerToDB")]
+    partial class addingAnswerToDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,11 +51,11 @@ namespace IatPrepExam.Migrations
 
             modelBuilder.Entity("IatPrepExam.Models.Answer", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
                     b.Property<string>("AnswerValue")
                         .IsRequired()
@@ -64,7 +67,7 @@ namespace IatPrepExam.Migrations
                     b.Property<int>("QuizzId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("id");
 
                     b.HasIndex("QuestionId");
 
@@ -158,7 +161,7 @@ namespace IatPrepExam.Migrations
                         .IsRequired();
 
                     b.HasOne("IatPrepExam.Models.Quizz", "Quizz")
-                        .WithMany("Answers")
+                        .WithMany()
                         .HasForeignKey("QuizzId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -186,11 +189,6 @@ namespace IatPrepExam.Migrations
             modelBuilder.Entity("IatPrepExam.Models.Question", b =>
                 {
                     b.Navigation("Alternatives");
-                });
-
-            modelBuilder.Entity("IatPrepExam.Models.Quizz", b =>
-                {
-                    b.Navigation("Answers");
                 });
 #pragma warning restore 612, 618
         }
