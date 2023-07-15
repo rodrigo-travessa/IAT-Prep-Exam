@@ -88,6 +88,9 @@ namespace IatPrepExam.Controllers
         {
             if (ModelState.IsValid)
             {
+                _context.Questions.Update(question);
+                _context.SaveChanges();
+
                 foreach (var alt in question.Alternatives)
                 {
                     _context.Alternatives.Update(alt);
