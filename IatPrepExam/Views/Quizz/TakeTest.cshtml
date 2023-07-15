@@ -1,5 +1,10 @@
 ﻿@model Quizz
 
+@{
+
+    char[] letters = { 'A', 'B', 'C', 'D', 'E' };
+}
+
 <form asp-controller="Quizz" asp-action="Results" method="post">
     <div class="container">
         <div class="row">
@@ -13,25 +18,21 @@
             {
                 @for (int i = 0; i < Model.Questions.Count; i++)
                 {
-
-                    <h3>@(i+1) - @Model.Questions[i].Statement</h3>
                     <div>
-                        <input type="radio" name="@Model.Questions[i].QuestionId"  value="A" />
-                        <label>A - @Model.Questions[i].Alternatives[0].Text </label>
-                        <br />
-                        <input type="radio" name="@Model.Questions[i].QuestionId" value="B" />
-                        <label>B - @Model.Questions[i].Alternatives[1].Text</label>
-                        <br />
-                        <input type="radio" name="@Model.Questions[i].QuestionId" value="C" />
-                        <label>C - @Model.Questions[i].Alternatives[2].Text</label>
-                        <br />
-                        <input type="radio" name="@Model.Questions[i].QuestionId" value="D" />
-                        <label>D - @Model.Questions[i].Alternatives[3].Text</label>
-                        <br />
-                        <input type="radio" name="@Model.Questions[i].QuestionId" value="E" />
-                        <label>E - @Model.Questions[i].Alternatives[4].Text</label>
-                    </div>
+                        <h3>@(i + 1) - @Model.Questions[i].Statement</h3>
+                        <div class="form-check">
+                            @for (int j = 0; j < Model.Questions[i].Alternatives.Count(); j++)
+                            {
+                                if (!string.IsNullOrEmpty(@Model.Questions[i].Alternatives[j].Text))
+                                {
+                                    <input class="form-check-input" type="radio" name="@Model.Questions[i].QuestionId" value="@letters[j]" />
+                                    <label class="form-check-label">@letters[j] - @Model.Questions[i].Alternatives[j].Text </label>
+                                    <br />
+                                }
+                            }
 
+                        </div>
+                    </div>
                     <br />
                 }
             }
@@ -44,12 +45,3 @@
 
 
 
-@* <radiogroup>
-                        @foreach (var alternative in question.Alternatives)
-                        {
-                            <input type="radio" id="@(question.QuestionId)" name="@question.QuestionId" value="@(alternative.IsRight ? "Correto" : "Errado" )" />
-                            <label for="@alternative.Id">@alternative.Text</label>
-
-                            <br />
-                        }
-                    </radiogroup> *@

@@ -43,7 +43,7 @@ namespace IatPrepExam.Migrations
 
                     b.HasIndex("QuestionId");
 
-                    b.ToTable("Alternatives");
+                    b.ToTable("Alternatives", (string)null);
                 });
 
             modelBuilder.Entity("IatPrepExam.Models.Answer", b =>
@@ -70,7 +70,7 @@ namespace IatPrepExam.Migrations
 
                     b.HasIndex("QuizzId");
 
-                    b.ToTable("Answers");
+                    b.ToTable("Answers", (string)null);
                 });
 
             modelBuilder.Entity("IatPrepExam.Models.Question", b =>
@@ -86,7 +86,7 @@ namespace IatPrepExam.Migrations
 
                     b.HasKey("QuestionId");
 
-                    b.ToTable("Questions");
+                    b.ToTable("Questions", (string)null);
                 });
 
             modelBuilder.Entity("IatPrepExam.Models.Quizz", b =>
@@ -120,7 +120,7 @@ namespace IatPrepExam.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Quizzes");
+                    b.ToTable("Quizzes", (string)null);
                 });
 
             modelBuilder.Entity("QuestionQuizz", b =>
@@ -135,7 +135,7 @@ namespace IatPrepExam.Migrations
 
                     b.HasIndex("QuizzesId");
 
-                    b.ToTable("QuestionQuizz");
+                    b.ToTable("QuestionQuizz", (string)null);
                 });
 
             modelBuilder.Entity("IatPrepExam.Models.Alternative", b =>

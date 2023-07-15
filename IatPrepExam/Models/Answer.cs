@@ -14,6 +14,6 @@ namespace IatPrepExam.Models
         [ForeignKey("QuestionId")]
         [ValidateNever]
         public Question Question { get; set; }
-        public string AnswerValue {get; set; }
+        public string AnswerValue { get; set; } = string.Empty;
     }
 }

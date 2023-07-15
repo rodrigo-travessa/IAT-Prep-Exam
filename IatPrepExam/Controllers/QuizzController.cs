@@ -21,13 +21,13 @@ namespace IatPrepExam.Controllers
         }
 
         // GET: Quizz
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.Quizzes.ToListAsync());
+            return View(_context.Quizzes.ToList());
         }
 
         // GET: Quizz/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
             
             var AnsweredQuizz = _context.Quizzes.Include("Answers").Include(u => u.Questions).ThenInclude(u => u.Alternatives).Where(u => u.Id == id).First();
@@ -63,7 +63,7 @@ namespace IatPrepExam.Controllers
                 _context.Add(quizzWithQuestions);
                 _context.SaveChanges();
 
-                return RedirectToAction("TakeTest", quizz.Id.ToString());
+                return RedirectToAction("TakeTest", new { Id = quizzWithQuestions.Id.ToString() });
             }
             return View(quizz);
         }
@@ -135,8 +135,8 @@ namespace IatPrepExam.Controllers
             }
 
         
-            int Wrongs = AnsweredQuizz.Answers.Count() - AnsweredQuizz.Rights ;
-            AnsweredQuizz.Score = AnsweredQuizz.Rights - (0.25 * Wrongs);
+            int Wrongs = (int)(AnsweredQuizz.Answers.Count - AnsweredQuizz.Rights);
+            AnsweredQuizz.Score = (double)(AnsweredQuizz.Rights - (0.25 * Wrongs));
             double y = AnsweredQuizz.Score / AnsweredQuizz.Questions.Count();
             if(y < 0)
             {
@@ -144,7 +144,7 @@ namespace IatPrepExam.Controllers
             }
             else
             {
-                AnsweredQuizz.ScoreRatio = y * 100;
+                AnsweredQuizz.ScoreRatio = y;
             }
 
             _context.Quizzes.Update(AnsweredQuizz);

@@ -41,7 +41,7 @@
                     @Html.DisplayFor(modelItem => item.Score)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ScoreRatio)
+                    @item.ScoreRatio.ToString("P2");
                 </td>
                 <td>
                     <a asp-action="TakeTest" asp-route-id="@item.Id">Fazer A Prova</a> |
