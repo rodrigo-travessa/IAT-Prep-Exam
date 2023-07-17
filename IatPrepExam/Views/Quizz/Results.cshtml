@@ -21,7 +21,7 @@
             Você levou @timeToString pra concluir o Questionário.
         </div>
         <div>
-            @(timeToFinish.Seconds / Model.NumberOfQuestions) Segundos Por Questão.
+            @((timeToFinish.TotalSeconds / Model.NumberOfQuestions).ToString("f0")) Segundos Por Questão.
             <br /><br />
         </div>
     </div>
