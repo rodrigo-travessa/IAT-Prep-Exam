@@ -29,9 +29,9 @@ namespace IatPrepExam.Controllers
         // GET: Quizz/Details/5
         public IActionResult Details(int? id)
         {
-            
+
             var AnsweredQuizz = _context.Quizzes.Include("Answers").Include(u => u.Questions).ThenInclude(u => u.Alternatives).Where(u => u.Id == id).First();
-            string[] letters = { "A", "B", "C", "D", "E" };           
+            string[] letters = { "A", "B", "C", "D", "E" };
 
             return View(AnsweredQuizz);
         }
@@ -54,7 +54,14 @@ namespace IatPrepExam.Controllers
                 Quizz quizzWithQuestions = new Quizz();
                 quizzWithQuestions.Id = quizz.Id;
                 quizzWithQuestions.NameOfStudent = quizz.NameOfStudent;
-                quizzWithQuestions.NumberOfQuestions = quizz.NumberOfQuestions;
+                if (quizz.NumberOfQuestions < _context.Questions.Count())
+                {
+                    quizzWithQuestions.NumberOfQuestions = quizz.NumberOfQuestions;
+                }
+                else
+                {
+                    quizzWithQuestions.NumberOfQuestions = _context.Questions.Count();
+                }
                 quizzWithQuestions.StartedAt = DateTime.Now;
                 var questionsFromDb = _context.Questions.ToList();
                 quizzWithQuestions.Questions.AddRange(questionsFromDb.OrderBy(x => Random.Shared.Next()).Take(quizzWithQuestions.NumberOfQuestions));
@@ -115,6 +122,8 @@ namespace IatPrepExam.Controllers
         [HttpPost]
         public IActionResult Results(Quizz quizz)
         {
+
+
             var x = Request.Form.ToDictionary(x => x.Key, x => x.Value);
 
             var AnsweredQuizz = _context.Quizzes.Include(u => u.Questions).ThenInclude(u => u.Alternatives).Where(u => u.Id == quizz.Id).First();
@@ -124,7 +133,7 @@ namespace IatPrepExam.Controllers
             {
                 if (x.ContainsKey(question.QuestionId.ToString()))
                 {
-                    AnsweredQuizz.Answers.Add(new Answer { QuestionId = question.QuestionId, QuizzId = quizz.Id, AnswerValue = x.GetValueOrDefault(question.QuestionId.ToString())});
+                    AnsweredQuizz.Answers.Add(new Answer { QuestionId = question.QuestionId, QuizzId = quizz.Id, AnswerValue = x.GetValueOrDefault(question.QuestionId.ToString()) });
                     int comparator = letters.ToList().IndexOf(x.GetValueOrDefault(question.QuestionId.ToString()));
                     var questionFromDB = _context.Questions.Where(u => u.QuestionId == question.QuestionId).Include("Alternatives").FirstOrDefault();
                     if (questionFromDB.Alternatives[comparator].IsRight)
@@ -134,11 +143,11 @@ namespace IatPrepExam.Controllers
                 }
             }
 
-        
+
             int Wrongs = (int)(AnsweredQuizz.Answers.Count - AnsweredQuizz.Rights);
             AnsweredQuizz.Score = (double)(AnsweredQuizz.Rights - (0.25 * Wrongs));
             double y = AnsweredQuizz.Score / AnsweredQuizz.Questions.Count();
-            if(y < 0)
+            if (y < 0)
             {
                 AnsweredQuizz.ScoreRatio = 0;
             }
@@ -147,10 +156,16 @@ namespace IatPrepExam.Controllers
                 AnsweredQuizz.ScoreRatio = y;
             }
 
-            _context.Quizzes.Update(AnsweredQuizz);
-            _context.SaveChanges();
+            if (AnsweredQuizz.FinishedAt.Year < 2000)
+            {
+                AnsweredQuizz.FinishedAt = DateTime.Now;
+                _context.Quizzes.Update(AnsweredQuizz);
+                _context.SaveChanges();
+            }
 
-            return View(AnsweredQuizz);
+            return View(_context.Quizzes.Find(quizz.Id));
+
         }
     }
 }
+
