@@ -26,31 +26,33 @@
         {
             @for (int i = 0; i < Model.Questions.Count; i++)
             {
-                <h3> (Questão - @(i + 1)) @Model.Questions[i].Statement</h3>
-                <h6>(ID - @Model.Questions[i].QuestionId) </h6>
-                <div>
-                    @for (int j = 0; j < Model.Questions[i].Alternatives.Count; j++)
-                    {
-                        if (!string.IsNullOrEmpty(@Model.Questions[i].Alternatives[j].Text))
+                <div class="card">
+                    <div class="card-header bg-primary bg-opacity-25">
+                        <h3> (Questão - @(i + 1)) @Model.Questions[i].Statement</h3>
+                        <h6>(ID - @Model.Questions[i].QuestionId) </h6>
+                    </div>
+                    <div class="card-body">
+                        @for (int j = 0; j < Model.Questions[i].Alternatives.Count; j++)
                         {
+                            if (!string.IsNullOrEmpty(@Model.Questions[i].Alternatives[j].Text))
+                            {
 
-                            <label style="color: @(@Model.Questions[i].Alternatives[j].IsRight ? "blue" : "red")">@letters[j] - @Model.Questions[i].Alternatives[j].Text </label>
-                            <br />
+                                <label style="color: @(@Model.Questions[i].Alternatives[j].IsRight ? "blue" : "red")">@letters[j] - @Model.Questions[i].Alternatives[j].Text </label>
+                                <br />
+                            }
                         }
-                    }
+                        <h5>
+                            Sua Resposta Foi :
+                            @if (Model.Answers.Where(x => x.Question == Model.Questions[i]).Count() > 0)
+                            {
+                                @Model.Answers.Where(x => x.Question == Model.Questions[i]).First().AnswerValue
+                            }
+                        </h5>
+                    </div>
                 </div>
-                <h5>
-                    Sua Resposta Foi :
-                    @if (Model.Answers.Where(x => x.Question == Model.Questions[i]).Count() > 0)
-                    {
-                        @Model.Answers.Where(x => x.Question == Model.Questions[i]).First().AnswerValue
-                        ;
-                    }
-                </h5>
                 <br />
             }
         }
-
     </div>
 </div>
 <div>
