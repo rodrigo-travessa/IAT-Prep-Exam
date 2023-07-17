@@ -7,7 +7,7 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create" class="btn btn-primary">Create New</a>
+    <a asp-action="Create" class="btn btn-primary">Novo Simulado</a>
 </p>
 <table class="table">
     <thead>
@@ -44,9 +44,9 @@
                     @item.ScoreRatio.ToString("P2");
                 </td>
                 <td>
-                    <a asp-action="TakeTest" asp-route-id="@item.Id">Fazer A Prova</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a class="btn btn-primary" asp-action="TakeTest" asp-route-id="@item.Id">Fazer A Prova</a> |
+                    <a class="btn btn-secondary" asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Deletar</a>
                 </td>
             </tr>
         }

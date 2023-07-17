@@ -3,7 +3,7 @@
 <h1>@Model.Count() Questões Cadastradas até o Momento</h1>
 
 <p>
-    <a class="btn btn-primary" asp-controller="Question" asp-action="Create">Create New</a>
+    <a class="btn btn-primary" asp-controller="Question" asp-action="Create">Criar Nova Questão</a>
 </p>
 <table class="table">
     <thead>
@@ -28,8 +28,8 @@
                     @Html.DisplayFor(modelItem => item.Statement)
                 </td>
                 <td width="15%">
-                    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.QuestionId">Edit</a>
-                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.QuestionId">Delete</a>
+                    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.QuestionId">Editar</a>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.QuestionId">Deletar</a>
                 </td>
             </tr>
         }
