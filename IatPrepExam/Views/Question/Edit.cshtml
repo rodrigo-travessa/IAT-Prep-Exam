@@ -19,7 +19,6 @@
                 <label style="width:3%; font-size:xx-large" asp-for="Alternatives">@(i + 1)</label>
                 <input asp-for="Alternatives[i].Text" class="form-control" />
                 <input asp-for="Alternatives[i].Id" hidden />
-                <input asp-for="Alternatives[i].IsRight" hidden />
                 <input asp-for="Alternatives[i].Question" hidden />
                 <input asp-for="Alternatives[i].QuestionId" hidden />
                 <input style="width:7%" asp-for="Alternatives[i].IsRight" type="checkbox" />
