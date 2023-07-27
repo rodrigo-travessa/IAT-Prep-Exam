@@ -1,0 +1,54 @@
+﻿@model IEnumerable<IatModels.Quizz>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Novo Simulado</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NameOfStudent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumberOfQuestions)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Score)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ScoreRatio)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NameOfStudent)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumberOfQuestions)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Score)
+                </td>
+                <td>
+                    @item.ScoreRatio.ToString("P2");
+                </td>
+                <td>
+                    <a class="btn btn-primary" asp-action="TakeTest" asp-route-id="@item.Id">Fazer A Prova</a> |
+                    <a class="btn btn-secondary" asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Deletar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

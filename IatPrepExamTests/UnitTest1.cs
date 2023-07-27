@@ -1,5 +1,5 @@
-using IatPrepExam.Data;
-using IatPrepExam.Models;
+using IatDataAccess.Data;
+using IatModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace IatPrepExam.Tests

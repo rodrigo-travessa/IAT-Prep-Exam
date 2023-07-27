@@ -5,7 +5,13 @@ VisualStudioVersion = 17.7.33808.371
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IatPrepExam", "IatPrepExam\IatPrepExam.csproj", "{59520419-D0A8-4044-83D3-C00BA83172DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IatPrepExam.Tests", "IatPrepExamTests\IatPrepExam.Tests.csproj", "{E073B5F4-18F2-4AF7-A008-0875656B821B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IatPrepExam.Tests", "IatPrepExamTests\IatPrepExam.Tests.csproj", "{E073B5F4-18F2-4AF7-A008-0875656B821B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IatModels", "IatModels\IatModels.csproj", "{F58A37A0-3615-4C46-BA10-3F2BCDEF7882}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IatDataAccess", "IatDataAccess\IatDataAccess.csproj", "{FE23DC54-AA41-46A3-84CE-8F233B5CE3B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IatUtilities", "IatUtilities\IatUtilities.csproj", "{1FE41C9D-5932-4546-8863-7C0DA100DE19}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +27,18 @@ Global
 		{E073B5F4-18F2-4AF7-A008-0875656B821B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E073B5F4-18F2-4AF7-A008-0875656B821B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E073B5F4-18F2-4AF7-A008-0875656B821B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F58A37A0-3615-4C46-BA10-3F2BCDEF7882}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F58A37A0-3615-4C46-BA10-3F2BCDEF7882}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F58A37A0-3615-4C46-BA10-3F2BCDEF7882}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F58A37A0-3615-4C46-BA10-3F2BCDEF7882}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE23DC54-AA41-46A3-84CE-8F233B5CE3B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE23DC54-AA41-46A3-84CE-8F233B5CE3B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE23DC54-AA41-46A3-84CE-8F233B5CE3B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE23DC54-AA41-46A3-84CE-8F233B5CE3B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FE41C9D-5932-4546-8863-7C0DA100DE19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FE41C9D-5932-4546-8863-7C0DA100DE19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FE41C9D-5932-4546-8863-7C0DA100DE19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FE41C9D-5932-4546-8863-7C0DA100DE19}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
