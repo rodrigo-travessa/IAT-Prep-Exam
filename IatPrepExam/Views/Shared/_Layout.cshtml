@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/IatPrepExam.styles.css" asp-append-version="true" />
 </head>
-<body>
+<body >
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3">
             <div class="container-fluid">
@@ -34,13 +34,13 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container-fluid">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer">
+    <footer class="border-top footer fixed-bottom">
         <div class="container">
             &copy; 2023 - IatPrepExam
         </div>
