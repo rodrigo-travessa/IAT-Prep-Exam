@@ -6,16 +6,18 @@
     string timeToString = timeToFinish.ToString(@"hh\:mm\:ss");
     char[] letters = { 'A', 'B', 'C', 'D', 'E' };
 }
+<div class="text-white">
 
-<h1>Resultado</h1>
-<h5> Pontos : @Model.Score</h5>
-<h5> Percentual de Acerto : @Model.ScoreRatio.ToString("P2")</h5>
-<div>
-    Você levou @timeToString pra concluir o Questionário.
-</div>
-<div>
-    @((timeToFinish.TotalSeconds / Model.NumberOfQuestions).ToString("f0")) Segundos Por Questão.
-    <br /><br />
+    <h1>Resultado</h1>
+    <h5> Pontos : @Model.Score</h5>
+    <h5> Percentual de Acerto : @Model.ScoreRatio.ToString("P2")</h5>
+    <div>
+        Você levou @timeToString pra concluir o Questionário.
+    </div>
+    <div>
+        @((timeToFinish.TotalSeconds / Model.NumberOfQuestions).ToString("f0")) Segundos Por Questão.
+        <br /><br />
+    </div>
 </div>
 
 <div class="container">

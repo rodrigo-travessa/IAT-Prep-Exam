@@ -7,7 +7,7 @@
 
 <form method="post">
     <div class="row container">
-        <label asp-for="Statement" class="text-center">Enunciado</label>
+        <label asp-for="Statement" class="text-center text-white"><h3>Enunciado</h3></label>
         <textarea asp-for="Statement" class="form-control" rows="5"></textarea>
     </div>
     <br />
@@ -15,10 +15,10 @@
         @for (int i = 0; i <= 4; i++)
         {
             <div style="display:flex">
-                <label style="width:3%; font-size:xx-large" asp-for="Alternatives">@(i + 1)</label>
+                <label class="text-white" style="width:3%; font-size:xx-large" asp-for="Alternatives">@(i + 1)</label>
                 <input asp-for="Alternatives[i].Text" class="form-control" />
                 <input style="width:7%" asp-for="Alternatives[i].IsRight" type="checkbox" />
-                <label> Marque se correta </label>
+                <label class="text-white"> Marque se correta </label>
             </div>
         }
     </div>

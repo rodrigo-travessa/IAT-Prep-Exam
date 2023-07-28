@@ -18,5 +18,44 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    height: 80vh;
+    background-color:rgb(51, 83, 46, 0.77)
+}
+.nav-link:hover{
+    background-color:rgb(51, 83, 46, 0.77);
+    border-radius:10%;
+}
+
+.navbar {
+    background-color: rgb(51, 83, 46, 0.77)
+}
+.footer {
+    background-color: rgb(51, 83, 46, 0.77)
+}
+
+.nav-link{
+    color: white
+}
+.footer{
+    color:white
+}
+.label {
+    color: white
+}
+.control-label {
+    color: white
+}
+.btn-primary {
+    background-color: rgb(15, 70, 122)
+}
+.btn-secondary{
+    background-color:rgb(161, 92, 17)
+}
+h1{
+    color:white
+}
+
+.navbar-brand{
+    color:white
 }
