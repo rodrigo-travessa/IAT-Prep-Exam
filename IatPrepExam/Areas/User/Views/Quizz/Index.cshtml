@@ -1,4 +1,5 @@
-﻿@model IEnumerable<IatModels.Quizz>
+﻿@using IatUtilities;
+@model IEnumerable<IatModels.Quizz>
 
 @{
     ViewData["Title"] = "Index";
@@ -44,9 +45,13 @@
                     @item.ScoreRatio.ToString("P2");
                 </td>
                 <td>
-                    <a class="btn btn-primary" asp-action="TakeTest" asp-route-id="@item.Id">Fazer A Prova</a> |
-                    <a class="btn btn-secondary" asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
-                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Deletar</a>
+                    <a class="btn btn-primary" asp-action="TakeTest" asp-route-id="@item.Id">Fazer A Prova</a>
+                    <a class="btn btn-secondary" asp-action="Details" asp-route-id="@item.Id">Detalhes</a>
+                    @if (User.IsInRole(SD.Role_Admin))
+                    {
+                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Deletar</a>
+
+                    }
                 </td>
             </tr>
         }

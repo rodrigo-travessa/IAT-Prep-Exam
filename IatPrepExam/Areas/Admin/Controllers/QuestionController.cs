@@ -1,7 +1,10 @@
 ﻿using IatDataAccess.Data;
 using IatModels;
+using IatUtilities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 
 namespace IatPrepExam.Areas.Admin.Controllers
 {
@@ -104,6 +107,7 @@ namespace IatPrepExam.Areas.Admin.Controllers
         }
 
         // GET: Question/Delete/5
+        [Authorize(Roles = SD.Role_Admin)]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,6 +128,7 @@ namespace IatPrepExam.Areas.Admin.Controllers
         // POST: Question/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = SD.Role_Admin)]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var question = await _context.Questions.FindAsync(id);

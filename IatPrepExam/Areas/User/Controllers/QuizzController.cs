@@ -8,6 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using IatDataAccess.Data;
 using IatModels;
 using NuGet.Protocol;
+using IatUtilities;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace IatPrepExam.Areas.User.Controllers
 {
@@ -97,6 +100,7 @@ namespace IatPrepExam.Areas.User.Controllers
         // POST: Quizz/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = SD.Role_Admin)]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var quizz = await _context.Quizzes.FindAsync(id);
