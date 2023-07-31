@@ -28,8 +28,11 @@
                     @Html.DisplayFor(modelItem => item.Statement)
                 </td>
                 <td width="15%">
-                    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.QuestionId">Editar</a>
-                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.QuestionId">Deletar</a>
+                    @if (User.IsInRole(IatUtilities.SD.Role_Admin))
+                    {
+                        <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.QuestionId">Editar</a>
+                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.QuestionId">Deletar</a>
+                    }
                 </td>
             </tr>
         }

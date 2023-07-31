@@ -45,7 +45,10 @@
                     @item.ScoreRatio.ToString("P2");
                 </td>
                 <td>
-                    <a class="btn btn-primary" asp-action="TakeTest" asp-route-id="@item.Id">Fazer A Prova</a>
+                    @if (item.Score <= 0)
+                    {
+                        <a class="btn btn-primary" asp-action="TakeTest" asp-route-id="@item.Id">Fazer A Prova</a>
+                    }
                     <a class="btn btn-secondary" asp-action="Details" asp-route-id="@item.Id">Detalhes</a>
                     @if (User.IsInRole(SD.Role_Admin))
                     {

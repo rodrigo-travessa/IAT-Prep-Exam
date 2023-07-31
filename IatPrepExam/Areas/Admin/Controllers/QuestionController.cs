@@ -93,13 +93,12 @@ namespace IatPrepExam.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 _context.Questions.Update(question);
-                _context.SaveChanges();
 
                 foreach (var alt in question.Alternatives)
                 {
                     _context.Alternatives.Update(alt);
-                    _context.SaveChanges();
                 }
+                    _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
                 //return RedirectToAction(nameof(Index));
             }

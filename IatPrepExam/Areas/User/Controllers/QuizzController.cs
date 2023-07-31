@@ -33,10 +33,7 @@ namespace IatPrepExam.Areas.User.Controllers
         // GET: Quizz/Details/5
         public IActionResult Details(int? id)
         {
-
             var AnsweredQuizz = _context.Quizzes.Include("Answers").Include(u => u.Questions).ThenInclude(u => u.Alternatives).Where(u => u.Id == id).First();
-            string[] letters = { "A", "B", "C", "D", "E" };
-
             return View(AnsweredQuizz);
         }
 
@@ -47,8 +44,7 @@ namespace IatPrepExam.Areas.User.Controllers
         }
 
         // POST: Quizz/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ActionName("Create")]
         public IActionResult Create(Quizz quizz)
