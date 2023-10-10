@@ -12,3 +12,10 @@ Since IAT Prep Exam was created to help a small group of friends, instead of lar
 ![creatingQuizz](https://github.com/rodrigo-travessa/IAT-Prep-Exam/assets/90840099/c544096f-b0ad-4d64-8a72-5c4f3f58a0e5)
 ![takingthequizz](https://github.com/rodrigo-travessa/IAT-Prep-Exam/assets/90840099/a8f713ad-6382-45ef-94cc-4a00c836b9c9)
 ![results](https://github.com/rodrigo-travessa/IAT-Prep-Exam/assets/90840099/ba25de9f-b040-40b2-9004-1755fe465e27)
+
+
+To be able to run your own instance you will need .net 7, SQL server and Visual Studio.
+
+You can download the solution, run EFCore migrations with update-database in the package manager console.
+
+After the Database is created select the Development branch and run it.
