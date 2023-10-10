@@ -1,7 +1,10 @@
 # IatPrepExam
-This application allows for users to register questions and then request quizzes with any number of questions, the application will then pick random questions from the database and give a multiple choice quizz, after answering the user can check the result screen and see how well he did, and how long it took to complete the quiz, and the average time for each question.
-This application diferentiates users from administrators, only admins can delete questions, but anyone can add questions to the database, also only the user or an admin can delete the quizz history.
-Since this was made with the purpose of helping a small group of friends, instead of large scale usage, the details/results of quizzes are not hidden from other users, but this would be trivial to change.
+IAT Prep Exam is a quiz app that lets you create and take quizzes with any number of questions. Simply register your questions, then request a quiz. Quizmaster will randomly select questions from the database and give you a multiple-choice quiz. After you've finished answering, you can check the results screen to see how well you did, how long it took you to complete the quiz, and the average time for each question.
+
+IAT Prep Exam differentiates between users and administrators. Only administrators can delete questions, but anyone can add questions to the database. Additionally, only the user or an administrator can delete quiz history.
+
+Since IAT Prep Exam was created to help a small group of friends, instead of large-scale usage, the details and results of quizzes are not hidden from other users. However, this would be trivial to change.
+
 ![Homepage](https://github.com/rodrigo-travessa/IAT-Prep-Exam/assets/90840099/15fa84fa-cd2b-4780-93be-f43c0cd390a8)
 ![questionIndex](https://github.com/rodrigo-travessa/IAT-Prep-Exam/assets/90840099/a8c367cd-8f42-4d62-bc86-02b635b82ec8)
 ![creatingQuestions](https://github.com/rodrigo-travessa/IAT-Prep-Exam/assets/90840099/04e5b436-eea5-4999-bff4-df668fac11e1)
